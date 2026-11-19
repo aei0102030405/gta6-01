@@ -10,6 +10,8 @@ const START_SECONDS = 5;
 const DRIVE_SECONDS = 14;
 const CHASE_SECONDS = 7;
 const MISSION_SECONDS = 11;
+/** The cruising loop the drive and mission scenes share: garage, docks, motel. */
+const CRUISE_TARGETS = [{ x: 2600, y: 600 }, { x: 300, y: 2200 }, { x: 2800, y: 200 }];
 
 /** The road the player is travelling along, from the car's heading (stable at crossings). */
 function currentRoad(world) {
@@ -159,7 +161,7 @@ export function stageShot(name, world) {
   if (name === 'drive') {
     takeParkedCar(world);
     // Cruise the city with traffic around, always moving.
-    const cruise = makeCruiser(world, [{ x: 2600, y: 600 }, { x: 300, y: 2200 }, { x: 2800, y: 200 }]);
+    const cruise = makeCruiser(world, CRUISE_TARGETS);
     playFor(world, DRIVE_SECONDS, cruise);
     return { screen: SCREEN_PLAY };
   }
@@ -173,7 +175,7 @@ export function stageShot(name, world) {
   }
   // Mission: Marla's first job — a stolen car, the garage marker, the objective up top.
   takeParkedCar(world);
-  const cruise = makeCruiser(world, [{ x: 2600, y: 600 }, { x: 300, y: 2200 }, { x: 2800, y: 200 }]);
+  const cruise = makeCruiser(world, CRUISE_TARGETS);
   playFor(world, MISSION_SECONDS, cruise);
   return { screen: SCREEN_PLAY };
 }
