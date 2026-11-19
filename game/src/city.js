@@ -101,8 +101,9 @@ export function createCity(random) {
       lamps.push({ x: x0 + 6, y: y0 + 6 });
     }
   }
-  // Palms along the beach.
-  for (let x = 120; x < WORLD.width - 100; x += 260) {
+  // Palms along the beach, one clump every 260px.
+  const BEACH_PALM_SPACING = 260;
+  for (let x = 120; x < WORLD.width - 100; x += BEACH_PALM_SPACING) {
     palms.push({ x: x + random() * 60, y: CITY.beachY + 30 + random() * 40 });
   }
 
