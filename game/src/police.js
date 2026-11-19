@@ -5,6 +5,8 @@
 // chasing and smokes until it is towed away.
 
 import { CITY, POLICE, WORLD } from './config.js';
+/** How fast a chasing cop turns toward the player, radians per second. */
+const CHASE_TURN_RATE = 3.2;
 
 export function createPolice(city, vehicles, random) {
   const cops = [];
@@ -89,7 +91,7 @@ export function createPolice(city, vehicles, random) {
       let diff = wantAngle - cop.angle;
       while (diff > Math.PI) diff -= Math.PI * 2;
       while (diff < -Math.PI) diff += Math.PI * 2;
-      cop.angle += Math.max(-3.2 * dt, Math.min(3.2 * dt, diff));
+      cop.angle += Math.max(-CHASE_TURN_RATE * dt, Math.min(CHASE_TURN_RATE * dt, diff));
       cop.speed += (POLICE.carSpeed - cop.speed) * Math.min(1, 1.6 * dt);
       // Move on each axis separately so the car slides along walls instead of
       // cutting across a block and wedging into a building corner.
