@@ -12,6 +12,8 @@ export const SCREEN_OVER = 'over';
 
 const MINIMAP = { w: 220, h: 168, margin: 16 };
 const STAR = '★';
+/** Game speed units to km/h for the speedometer. */
+const SPEED_TO_KMH = 0.24;
 
 export function createRenderer(canvas) {
   const context = canvas.getContext('2d');
@@ -359,7 +361,7 @@ export function createRenderer(canvas) {
     text(stars, 26, 88, 20, state.police.wanted > 0 ? PALETTE.star : PALETTE.starEmpty, 'left');
     // Speed, bottom-left, when driving (with a dark backing so it reads over roads).
     if (player.inCar && player.car) {
-      const kmh = Math.round(Math.abs(player.car.speed) * 0.24);
+      const kmh = Math.round(Math.abs(player.car.speed) * SPEED_TO_KMH);
       context.fillStyle = 'rgba(16, 15, 20, 0.72)';
       context.fillRect(14, VIEW.height - 96, 150, 72);
       text(`${kmh}`, 26, VIEW.height - 52, 44, PALETTE.text, 'left');
