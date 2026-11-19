@@ -76,21 +76,28 @@ export function createInput(canvas) {
   function axis(neg, pos) {
     return (pos ? 1 : 0) - (neg ? 1 : 0);
   }
+  /** True when any key in the set is held down. */
+  function held(set) {
+    for (const code of set) {
+      if (keys.has(code)) return true;
+    }
+    return false;
+  }
 
   return {
     mouse,
     /** Movement axes, each -1, 0 or 1. */
     moveX() {
-      return axis(keys.has('ArrowLeft') || keys.has('KeyA'), keys.has('ArrowRight') || keys.has('KeyD'));
+      return axis(held(LEFT), held(RIGHT));
     },
     moveY() {
-      return axis(keys.has('ArrowUp') || keys.has('KeyW'), keys.has('ArrowDown') || keys.has('KeyS'));
+      return axis(held(UP), held(DOWN));
     },
     running() {
-      return keys.has('ShiftLeft') || keys.has('ShiftRight');
+      return held(RUN);
     },
     braking() {
-      return keys.has('Space');
+      return held(BRAKE);
     },
     /** The one-shot presses since the last call, as ACTION_* flags. */
     takeActions() {
