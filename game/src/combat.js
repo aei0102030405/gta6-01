@@ -5,6 +5,8 @@
 // All damage flows through callbacks the world owns, so this file knows no rules.
 
 const POOL = 48;
+/** How far in front of the shooter a bullet spawns. */
+const MUZZLE_OFFSET = 20;
 
 export function createCombat() {
   const bullets = [];
@@ -16,8 +18,8 @@ export function createCombat() {
     for (const b of bullets) {
       if (b.active) continue;
       b.active = true;
-      b.x = x + Math.cos(angle) * 20;
-      b.y = y + Math.sin(angle) * 20;
+      b.x = x + Math.cos(angle) * MUZZLE_OFFSET;
+      b.y = y + Math.sin(angle) * MUZZLE_OFFSET;
       b.vx = Math.cos(angle) * speed;
       b.vy = Math.sin(angle) * speed;
       b.range = range;
