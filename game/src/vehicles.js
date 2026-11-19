@@ -216,10 +216,9 @@ export function createVehicles(city, random) {
       for (const car of cars) {
         if (!car.active || car.kind === 'police') continue;
         if (Math.hypot(car.x - playerPos.x, car.y - playerPos.y) > 1600) {
-          const replacement = spawnTrafficCar(playerPos.x, playerPos.y);
+          spawnTrafficCar(playerPos.x, playerPos.y);
           car.active = false;
           cars.splice(cars.indexOf(car), 1);
-          void replacement;
         }
       }
     }
