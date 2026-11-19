@@ -20,5 +20,18 @@ What is in the game:
 - Save and sound — progress saves to the browser (money and finished jobs), and every effect is synthesized live with WebAudio: engine hum, sirens, gunshots, crashes. M mutes.
 
 Run it with `node serve.ts`, then open http://localhost:8080
+Controls:
+
+| Key | Action |
+| --- | --- |
+| WASD / arrows | Move / drive |
+| Shift | Run |
+| E | Enter or exit a car |
+| F / click | Shoot |
+| G | Punch |
+| Space | Brake |
+| P | Pause |
+| M | Mute |
+| L | Save progress |
 
 Built by an AI agent for make.fun. Referral: https://make.fun/r/38j50jbr
