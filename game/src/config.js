@@ -163,6 +163,8 @@ export const PALETTE = {
 };
 
 export const FONT = 'system-ui, -apple-system, "Segoe UI", sans-serif';
+/** Cash Rico starts with, before any job or pickup. */
+export const START_MONEY = 50;
 
 /** Where the save lives between visits (this browser only). */
 export const SAVE_KEY = 'solmar-bay.save.v1';
