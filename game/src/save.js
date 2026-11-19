@@ -2,7 +2,7 @@
 // browser's local storage. Nothing here touches the game rules; the world calls
 // save() when a job pays out and on demand (L), and load() at boot.
 
-import { BEST_KEY, SAVE_KEY } from './config.js';
+import { BEST_KEY, MISSIONS, SAVE_KEY } from './config.js';
 
 export function loadSave() {
   try {
@@ -12,7 +12,7 @@ export function loadSave() {
     if (typeof data !== 'object' || data === null) return null;
     return {
       money: typeof data.money === 'number' ? data.money : 0,
-      done: Array.isArray(data.done) && data.done.length === 3 ? data.done.map(Boolean) : [false, false, false],
+      done: Array.isArray(data.done) && data.done.length === MISSIONS.length ? data.done.map(Boolean) : MISSIONS.map(() => false),
       best: typeof data.best === 'number' ? data.best : 0,
     };
   } catch {
