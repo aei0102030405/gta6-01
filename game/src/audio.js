@@ -2,6 +2,8 @@
 // user gesture (browsers forbid sound before one). Engine hum follows the car's speed,
 // the siren is a two-tone wail while police are near, and gunshots, crashes, pickups
 // and mission chimes are short synthesized bursts. M toggles mute.
+/** Master output level (0..1) when not muted. */
+const MASTER_VOLUME = 0.5;
 
 export function createAudio() {
   let ctx = null;
@@ -23,7 +25,7 @@ export function createAudio() {
       if (!AC) return false;
       ctx = new AC();
       master = ctx.createGain();
-      master.gain.value = muted ? 0 : 0.5;
+      master.gain.value = muted ? 0 : MASTER_VOLUME;
       master.connect(ctx.destination);
       // One shared noise buffer for bursts (gunshots, crashes, skids).
       const len = ctx.sampleRate;
@@ -98,7 +100,7 @@ export function createAudio() {
     },
     toggleMute() {
       muted = !muted;
-      if (master) master.gain.value = muted ? 0 : 0.5;
+      if (master) master.gain.value = muted ? 0 : MASTER_VOLUME;
       return muted;
     },
     isMuted() {
