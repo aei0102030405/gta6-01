@@ -19,8 +19,10 @@ const MAX_FRAME = 0.25;
 
 const params = new URLSearchParams(window.location.search);
 const shot = params.get('shot');
+/** The seed space: any 32-bit value. */
+const SEED_MAX = 4294967296;
 const seedParam = Number.parseInt(params.get('seed') ?? '', 10);
-const seed = Number.isInteger(seedParam) ? seedParam : Math.floor(Math.random() * 4294967296);
+const seed = Number.isInteger(seedParam) ? seedParam : Math.floor(Math.random() * SEED_MAX);
 
 const canvas = document.getElementById('game');
 const status = document.getElementById('status');
