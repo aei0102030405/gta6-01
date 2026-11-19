@@ -8,6 +8,8 @@ import { CITY, PALETTE, PED, WORLD } from './config.js';
 const STATE_WALK = 0;
 const STATE_FLEE = 1;
 const STATE_DOWN = 2;
+/** How much faster a fleeing pedestrian runs than a strolling one. */
+const FLEE_SPEED_MULT = 2.6;
 
 export function createPedestrians(city, random) {
   const peds = [];
@@ -68,7 +70,7 @@ export function createPedestrians(city, random) {
       }
       let speed = ped.speed;
       if (ped.state === STATE_FLEE) {
-        speed = ped.speed * 2.6;
+        speed = ped.speed * FLEE_SPEED_MULT;
         ped.stateTimer -= dt;
         if (ped.stateTimer <= 0) ped.state = STATE_WALK;
       } else if (playerPos && playerSpeed > 300 && Math.hypot(ped.x - playerPos.x, ped.y - playerPos.y) < 90) {
@@ -76,7 +78,7 @@ export function createPedestrians(city, random) {
         ped.state = STATE_FLEE;
         ped.stateTimer = 1.5;
         ped.angle = Math.atan2(ped.y - playerPos.y, ped.x - playerPos.x);
-        speed = ped.speed * 2.6;
+        speed = ped.speed * FLEE_SPEED_MULT;
       }
       ped.x += Math.cos(ped.angle) * speed * dt;
       ped.y += Math.sin(ped.angle) * speed * dt;
