@@ -2,6 +2,8 @@
 // A fixed pool, allocated once; nothing allocates while the game runs.
 
 const POOL = 220;
+/** Strongest screen shake allowed, in pixels. */
+const MAX_SHAKE = 14;
 
 export function createEffects() {
   const parts = [];
@@ -38,7 +40,7 @@ export function createEffects() {
       return shakeY;
     },
     addShake(amount) {
-      shake = Math.min(14, shake + amount);
+      shake = Math.min(MAX_SHAKE, shake + amount);
     },
     sparks(x, y, color, count) {
       for (let i = 0; i < (count || 10); i += 1) {
