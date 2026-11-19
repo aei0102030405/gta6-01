@@ -4,7 +4,7 @@
 // pickups, particles and the camera. It returns event flags so the caller can play
 // sounds and announce screens without the world knowing about them.
 
-import { CAR, CASH, CITY, PALETTE, PED, PLAYER, STEP, VIEW, WEAPON, WORLD } from './config.js';
+import { CAR, CASH, CITY, PALETTE, PED, PLAYER, START_MONEY, STEP, VIEW, WEAPON, WORLD } from './config.js';
 import { createCity } from './city.js';
 import { createVehicles } from './vehicles.js';
 import { createPedestrians } from './pedestrians.js';
@@ -44,7 +44,7 @@ export function createWorld(random, audio) {
   const cash = [];
   const state = {
     player, camera, city, vehicles, pedestrians, police, combat, missions, effects,
-    cash, money: 50, best: 0, time: 0, elapsed: 0,
+    cash, money: START_MONEY, best: 0, time: 0, elapsed: 0,
     muted: false, savedFlash: 0, shootTimer: 0, punchTimer: 0, crimeTimer: 0,
   };
 
@@ -72,7 +72,7 @@ export function createWorld(random, audio) {
     combat.clear();
     cash.length = 0;
     for (let i = 0; i < CASH.count; i += 1) spawnCash();
-    state.money = saved ? saved.money : 50;
+    state.money = saved ? saved.money : START_MONEY;
     state.best = saved ? saved.best : 0;
     state.time = 0;
     state.elapsed = 0;
