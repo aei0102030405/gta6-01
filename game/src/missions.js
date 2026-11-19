@@ -34,13 +34,8 @@ export function createMissions() {
     active = { id: def.id, stage: 0 };
     timer = def.timeLimit || 0;
     hasPackage = false;
-    if (def.id === 'wheels') {
-      toast = `Marla: "${def.brief}"`;
-    } else if (def.id === 'package') {
-      toast = `Marla: "${def.brief}"`;
-    } else if (def.id === 'heat') {
-      toast = `Marla: "${def.brief}"`;
-    }
+    // Every job opens with Marla's briefing, word for word.
+    toast = `Marla: "${def.brief}"`;
     toastTimer = 7;
     return active;
   }
